@@ -1,0 +1,20 @@
+# We specify the name of the action
+name: Issue assignment
+
+# We specify the events that will trigger it with 'on:'
+on:
+  issues:
+    types: [opened]
+
+# We specify the jobs, which can run parallel (by default)
+# and that we make them to make good use of that. Otherwise,
+# we can specify dependencies between them.
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Auto-assign issue'
+        uses: pozil/auto-assign-issue@v1.0.3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: wences-sanchez
